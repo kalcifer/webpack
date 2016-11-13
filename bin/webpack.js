@@ -19,11 +19,18 @@ var yargs = require("yargs")
 		"Usage with config file: webpack");
 
 require("./config-yargs")(yargs);
+var initModule = require("./init");
 
 var DISPLAY_GROUP = "Stats options:";
 var BASIC_GROUP = "Basic options:";
 
 yargs.options({
+	"init": {
+		type: "boolean",
+		describe: "Interactive init for webpack",
+		alias: 'i',
+		group: BASIC_GROUP
+	},
 	"json": {
 		type: "boolean",
 		alias: "j",
@@ -136,6 +143,11 @@ if(argv.verbose) {
 	argv["display-modules"] = true;
 	argv["display-cached"] = true;
 	argv["display-cached-assets"] = true;
+}
+
+if(argv.init){
+	initModule.start();
+	return;
 }
 
 var options = require("./convert-argv")(yargs, argv);
