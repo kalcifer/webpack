@@ -163,6 +163,7 @@ function ifArg(name, fn, init) {
 }
 
 function processOptions(options) {
+
 	// process Promise
 	if(typeof options.then === "function") {
 		options.then(processOptions).catch(function(err) {
